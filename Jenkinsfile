@@ -14,12 +14,12 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'npm install'
-                //sh 'npm run build'
+                sh 'npm run build'
             }
         }
         stage('Dockerize') {
             steps {
-                sh "docker build -t eruobodo/backend_app:${BUILD_NUMBER} ."
+                sh "docker build -t eruobodo/backendapp:${BUILD_NUMBER} ."
             }
         }
         //stage('Publish') {
@@ -38,14 +38,15 @@ pipeline {
         stage('Push') {
 
               steps {
-                 sh 'docker push eruobodo/backend_app:${BUILD_NUMBER}'
+                 sh 'docker push eruobodo/backendapp:${BUILD_NUMBER}'
               }
         }
 		}
 	
     post {
         always {
-      sh 'docker logout'
+		cleanWs()
+      		sh 'docker logout'
         }
    }
 }
