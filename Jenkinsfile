@@ -14,7 +14,6 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'npm install'
-                sh 'npm run build'
             }
         }
         stage('Dockerize') {
@@ -41,6 +40,11 @@ pipeline {
                  sh 'docker push eruobodo/backendapp:${BUILD_NUMBER}'
               }
         }
+	    stage('Deploy'){
+		    steps {
+			    sh 'npm start'
+		    }
+	    }
 		}
 	
     post {
