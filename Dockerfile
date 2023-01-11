@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 
 # Install app dependencies
 COPY package*.json ./
-RUN npm install --only=production
+RUN npm install
 
 # Bundle app source
 COPY . .
@@ -16,4 +16,3 @@ COPY . .
 
 EXPOSE 8787
 CMD [ "npm", "start" ]
-#CMD ["node", "index.js"]
